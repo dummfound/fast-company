@@ -6,18 +6,12 @@ const Users = () => {
 
 let count = users.length;
 
-function declination(number, titles) {
-    let cases = [2, 0, 1, 1, 1, 2];
-	  return `${number} ${titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]]}`;	
-}
-let resultDeclination = declination(count, ["человек", "человека", "человек"]);
 
-  // Меняем контент в заголовке
   const getBageContent = () => {
-    return count ? `${resultDeclination} тусанет с тобой сегодня` : "Ни кто с тобой не тусанет"
+    let humanStatus = '';
+    (count % 10 > 2 && count % 10 <= 4) ?  humanStatus = 'Человека' : humanStatus = 'Человек';
+    return count ? `${count} ${humanStatus} тусанет с тобой сегодня` : "Ни кто с тобой не тусанет";
   };
-
-
 
   // Меняем цвет заголовку
   const getBageClasses = () => {
