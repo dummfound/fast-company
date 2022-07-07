@@ -4,13 +4,20 @@ import api from "../api";
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
 
-  // console.log(users);
-  let count = users.length;
+let count = users.length;
+
+function declination(number, titles) {
+    let cases = [2, 0, 1, 1, 1, 2];
+	  return `${number} ${titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]]}`;	
+}
+let resultDeclination = declination(count, ["человек", "человека", "человек"]);
 
   // Меняем контент в заголовке
   const getBageContent = () => {
-    return count ? `${count} тусанет с тобой сегодня` : "Ни кто с тобой не тусанет"
+    return count ? `${resultDeclination} тусанет с тобой сегодня` : "Ни кто с тобой не тусанет"
   };
+
+
 
   // Меняем цвет заголовку
   const getBageClasses = () => {
@@ -25,8 +32,9 @@ const Users = () => {
   };
 
   const renderrHeadTable = () => {
-    return users.length !== 0 ?         
-        (<thead>
+
+    return users.length !== 0 &&         
+        <thead>
             <tr>
               <th scope="col">Имя</th>
               <th scope="col">Качество</th>
@@ -34,8 +42,8 @@ const Users = () => {
               <th scope="col">Встретился раз</th>
               <th scope="col">Оценка</th>
             </tr>
-        </thead>) 
-        : "";
+        </thead> 
+        
   }
 
   return (
