@@ -3,24 +3,18 @@ import api from "../api";
 
 const Users = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
+  const [word, setWord] = useState("человек");
 
-  // console.log(users);
   let count = users.length;
 
-  // Скрываем контейнер c таблицей при нуле
-  const getTableContainer = document.querySelector(".table-container");
-
-  if (count === 0) {
-    getTableContainer.classList.add("table__hidden");
-  }
-
-  // Меняем контент в заголовке
   const getBageContent = () => {
-    if (count) {
-      return `${count} Человек тусанет с тобой сегодня`;
-    } else {
-      return `Никто с тобой не тусанет`;
-    }
+    let humanStatus = "";
+    count % 10 > 2 && count % 10 <= 4
+      ? (humanStatus = "Человека")
+      : (humanStatus = "Человек");
+    return count
+      ? `${count} ${humanStatus} тусанет с тобой сегодня`
+      : "Ни кто с тобой не тусанет";
   };
 
   // Меняем цвет заголовку
@@ -35,22 +29,30 @@ const Users = () => {
     setUsers((prevState) => prevState.filter((user) => id !== user._id));
   };
 
+  const renderHeadTable = () => {
+    return (
+      count !== 0 && (
+        <thead>
+          <tr>
+            <th scope="col">Имя</th>
+            <th scope="col">Качество</th>
+            <th scope="col">Профессия</th>
+            <th scope="col">Встретился раз</th>
+            <th scope="col">Оценка</th>
+          </tr>
+        </thead>
+      )
+    );
+  };
+
   return (
     <React.Fragment>
       <h1 className={getBageClasses()}>{getBageContent()}</h1>
       <div className="table-container">
         <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Имя</th>
-              <th scope="col">Качество</th>
-              <th scope="col">Профессия</th>
-              <th scope="col">Встретился раз</th>
-              <th scope="col">Оценка</th>
-            </tr>
-          </thead>
-          {users.map((user) => (
-            <tbody>
+          {renderHeadTable()}
+          <tbody>
+            {users.map((user) => (
               <tr>
                 <td>{user.name}</td>
                 <td>
@@ -77,8 +79,8 @@ const Users = () => {
                   </button>
                 </td>
               </tr>
-            </tbody>
-          ))}
+            ))}
+          </tbody>
         </table>
       </div>
     </React.Fragment>
