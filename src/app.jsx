@@ -6,13 +6,13 @@ const App = () => {
   const [users, setUsers] = useState(api.users.fetchAll());
 
   const handleChangeBookmark = (id) => {
-    console.log(id);
     const updateUsers = users.map((user) => {
       if (user._id === id) {
         user.bookmark = !user.bookmark;
       }
       return user;
     });
+
     setUsers(updateUsers);
   };
 

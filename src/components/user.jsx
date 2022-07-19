@@ -2,7 +2,7 @@ import React from "react";
 import Bookmark from "./bookmark";
 import Qualities from "./qualitie";
 
-const User = ({ users, user, handleUsersChange, handleChangeBookmark }) => {
+const User = ({ user, handleUsersChange, handleChangeBookmark }) => {
   return (
     <tr>
       <td>{user.name}</td>

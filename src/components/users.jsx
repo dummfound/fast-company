@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import User from "./user";
 import SearchStatus from "./searchStatus";
+import Pagination from "./pagination";
+import { paginat } from "../app/utils/paginat";
 
 const Users = ({
   users,
@@ -9,6 +11,16 @@ const Users = ({
   handleChangeBookmark,
 }) => {
   let count = users.length;
+  const pageSize = 4;
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  if (pageSize === 1) return null;
+  const handlePageChange = (pageIndex) => {
+    setCurrentPage(pageIndex);
+  };
+
+  const userCrop = paginat(users, currentPage, pageSize);
 
   const renderHeadTable = () => {
     return (
@@ -34,12 +46,11 @@ const Users = ({
         <table className="table">
           {renderHeadTable()}
           <tbody>
-            {users.map((user) => (
+            {userCrop.map((user) => (
               <User
                 key={user._id}
                 user={user}
                 handleUsersChange={handleUsersChange}
-                users={users}
                 setUsers={setUsers}
                 handleChangeBookmark={handleChangeBookmark}
               />
@@ -47,6 +58,12 @@ const Users = ({
           </tbody>
         </table>
       </div>
+      <Pagination
+        itemsCount={count}
+        pageSize={pageSize}
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+      />
     </React.Fragment>
   );
 };
