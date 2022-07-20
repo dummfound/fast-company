@@ -1,9 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const Bookmark = ({status, onChangeBookmark, user }) => {
+const Bookmark = ({ user, handleChangeBookmark }) => {
     return (
-    <i className={!status ? "bi bi-bookmark" : "bi bi-bookmark-fill"} onClick={() => onChangeBookmark(user._id)}></i>
-    )
-}
+        <i
+            className={user.bookmark ? "bi bi-bookmark-fill" : "bi bi-bookmark"}
+            onClick={() => handleChangeBookmark(user._id)}
+        ></i>
+    );
+};
 
 export default Bookmark;

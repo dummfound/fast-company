@@ -1,6 +1,6 @@
 import React from "react";
 
-const Quality = ({ qualitie }) => {
+const Qualities = ({ qualitie }) => {
     return (
         <span className={`badge m-1 bg-${qualitie.color}`}>
             {qualitie.name}
@@ -8,4 +8,4 @@ const Quality = ({ qualitie }) => {
     );
 };
 
-export default Quality;
+export default Qualities;

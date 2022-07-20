@@ -1,37 +1,40 @@
-import React from 'react';
-import Quality from './quality';
-import Bookmark from './bookmark';
+import React from "react";
+import Bookmark from "./bookmark";
+import Qualities from "./qualitie";
 
-const User = ({user, onDelete, onChangeBookmark}) => {
-
+const User = ({ user, handleUsersChange, handleChangeBookmark }) => {
     return (
         <tr>
-                  <td>{user.name}</td>
-                  <td>
-                    {
-                      <ul>
+            <td>{user.name}</td>
+            <td>
+                {
+                    <ul>
                         {user.qualities.map((qualitie) => (
-                          <Quality key={qualitie._id}  qualitie = {qualitie}/>
+                            <Qualities key={qualitie._id} qualitie={qualitie} />
                         ))}
-                      </ul>
-                    }
-                  </td>
-                  <td>{user.profession.name}</td>
-                  <td>{user.completedMeetings}</td>
-                  <td>{user.rate}</td>
-                  <td><Bookmark status = {user.bookmark} onChangeBookmark={onChangeBookmark} user = {user}/></td>
-                 
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      onClick={() => onDelete(user._id)}
-                    >
-                      Удалить
-                    </button>
-                  </td>
-                </tr>     
-    )
-}
+                    </ul>
+                }
+            </td>
+            <td>{user.profession.name}</td>
+            <td>{user.completedMeetings}</td>
+            <td>{user.rate}</td>
+            <td>
+                <Bookmark
+                    user={user}
+                    handleChangeBookmark={handleChangeBookmark}
+                />
+            </td>
+            <td>
+                <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => handleUsersChange(user._id)}
+                >
+                    Удалить
+                </button>
+            </td>
+        </tr>
+    );
+};
 
 export default User;
