@@ -4,16 +4,16 @@ import api from "./api";
 
 const App = () => {
     const [users, setUsers] = useState(api.users.fetchAll());
-
+    
+    // Изменяем bookmark
     const handleChangeBookmark = (id) => {
-        const updateUsers = users.map((user) => {
+        const newUsers = users.map((user) => {
             if (user._id === id) {
                 user.bookmark = !user.bookmark;
             }
             return user;
         });
-
-        setUsers(updateUsers);
+        setUsers(newUsers);
     };
 
     // Фильтруем (удаляем) массив с нодами на повторение по id
@@ -24,9 +24,8 @@ const App = () => {
     return (
         <Users
             users={users}
-            setUsers={setUsers}
-            handleUsersChange={handleUsersChange}
-            handleChangeBookmark={handleChangeBookmark}
+            onDelete={handleUsersChange}
+            onChangeBookmark={handleChangeBookmark}
         />
     );
 };

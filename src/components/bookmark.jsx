@@ -9,4 +9,9 @@ const Bookmark = ({ user, handleChangeBookmark }) => {
     );
 };
 
+Bookmark.propTypes = {
+    user: PropTypes.object.isRequired,
+    handleChangeBookmark: PropTypes.func.isRequired
+};
+
 export default Bookmark;

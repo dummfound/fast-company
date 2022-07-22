@@ -8,4 +8,8 @@ const Qualities = ({ qualitie }) => {
     );
 };
 
+Qualities.prototype = {
+    qualitie: PropTypes.object.isRequired
+}
+
 export default Qualities;

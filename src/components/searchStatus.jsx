@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchStatus = ({ length }) => {
+const Qualities = ({ length }) => {
     const count = length;
     const getBageContent = () => {
         let humanStatus = "";
@@ -20,5 +20,9 @@ const SearchStatus = ({ length }) => {
     };
     return <h1 className={getBageClasses()}>{getBageContent()}</h1>;
 };
+
+Qualities.prototype = {
+    length : prototype.number.isRequired
+}
 
 export default SearchStatus;

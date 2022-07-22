@@ -37,4 +37,9 @@ const User = ({ user, handleUsersChange, handleChangeBookmark }) => {
     );
 };
 
+User.propTypes = {
+    handleUsersChange : prototype.func.isRequired,
+    handleChangeBookmark: prototype.func.isRequired,
+    user: prototype.object.isRequired   
+}
 export default User;
