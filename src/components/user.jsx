@@ -1,6 +1,7 @@
 import React from "react";
 import Bookmark from "./bookmark";
 import Qualities from "./qualitie";
+import PropTypes from "prop-types";
 
 const User = ({ user, handleUsersChange, handleChangeBookmark }) => {
     return (
@@ -38,8 +39,9 @@ const User = ({ user, handleUsersChange, handleChangeBookmark }) => {
 };
 
 User.propTypes = {
-    handleUsersChange : prototype.func.isRequired,
-    handleChangeBookmark: prototype.func.isRequired,
-    user: prototype.object.isRequired   
-}
+    user: PropTypes.object.isRequired,
+    handleUsersChange: PropTypes.func.isRequired,
+    handleChangeBookmark: PropTypes.func.isRequired
+};
+
 export default User;

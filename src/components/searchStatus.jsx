@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Qualities = ({ length }) => {
+const SearchStatus = ({ length }) => {
     const count = length;
     const getBageContent = () => {
         let humanStatus = "";
@@ -21,8 +22,7 @@ const Qualities = ({ length }) => {
     return <h1 className={getBageClasses()}>{getBageContent()}</h1>;
 };
 
-Qualities.prototype = {
-    length : prototype.number.isRequired
-}
-
+SearchStatus.propTypes = {
+    length: PropTypes.number.isRequired
+};
 export default SearchStatus;
