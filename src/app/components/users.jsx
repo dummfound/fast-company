@@ -35,7 +35,7 @@ const Users = ({ users: allUsers, ...rest }) => {
     const count = filteredUsers.length;
     const usersCrop = paginate(filteredUsers, currentPage, pageSize);
     const clearFilter = () => {
-        setSelectedProf();
+        setSelectedProf(null);
     };
 
     return (
