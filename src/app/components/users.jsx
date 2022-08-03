@@ -24,6 +24,9 @@ const Users = ({ users: allUsers, ...rest }) => {
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex);
     };
+    const handleSort = (item) => {
+        console.log(item);
+    };
     const filteredUsers = selectedProf
         ? allUsers.filter(
             (user) =>
@@ -59,7 +62,7 @@ const Users = ({ users: allUsers, ...rest }) => {
             <div className="d-flex flex-column">
                 <SearchStatus length={count} />
                 {count > 0 && (
-                    <UsersTable users={usersCrop} {...rest}/>
+                    <UsersTable users={usersCrop} onSort={handleSort} {...rest}/>
                 )}
                 <div className="d-flex justify-content-center">
                     <Pagination
