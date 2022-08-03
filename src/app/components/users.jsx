@@ -6,6 +6,8 @@ import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./usersTable";
 import { orderBy } from "lodash";
+import Loader from "./UI/Loader/Loader";
+
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState(null);
@@ -113,7 +115,9 @@ const Users = () => {
             </div>
         );
     }
-    return "loading";
+    return <div className="vh-100 d-flex align-items-center justify-content-center">
+        <Loader/>
+    </div>;
 };
 
 export default Users;

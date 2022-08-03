@@ -12,17 +12,30 @@ const UsersTable = ({
     onDelete
 }) => {
     const columns = {
-        name: { path: "name", name: "Имя" },
+        name: {
+            path: "name",
+            name: "Имя"
+        },
         qualities: {
             name: "Качества",
-            component: (user) => <QualitiesList qualities={user.qualities} />
+            component: (user) => (
+                <QualitiesList
+                    qualities={user.qualities}
+                />
+            )
         },
-        professions: { path: "profession.name", name: "Профессии" },
+        professions: {
+            path: "profession.name",
+            name: "Профессии"
+        },
         completedMeetings: {
             path: "completedMeetings",
-            name: "Встретилсяб раз"
+            name: "Встретился, раз"
         },
-        rate: { path: "rate", name: "Оценка" },
+        rate: {
+            path: "rate",
+            name: "Оценка"
+        },
         bookmark: {
             path: "bookmark",
             name: "Избранное",
