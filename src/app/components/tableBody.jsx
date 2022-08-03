@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { get } from "lodash";
 
 const TableBody = ({ data, columns }) => {
-
     const renderContent = (item, column) => {
         if (columns[column].component) {
             const component = columns[column].component;
@@ -17,14 +16,10 @@ const TableBody = ({ data, columns }) => {
 
     return (
         <tbody>
-            {data.map(item => (
+            {data.map((item) => (
                 <tr key={item._id}>
-                    {Object.keys(columns).map(column => (
-                        <td
-                            key={column}
-                        >
-                            {renderContent(item, column)}
-                        </td>
+                    {Object.keys(columns).map((column) => (
+                        <td key={column}>{renderContent(item, column)}</td>
                     ))}
                 </tr>
             ))}
@@ -35,6 +30,6 @@ const TableBody = ({ data, columns }) => {
 TableBody.propTypes = {
     data: PropTypes.array,
     columns: PropTypes.object
-}
+};
 
 export default TableBody;

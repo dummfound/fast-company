@@ -1,21 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import TableHeader from "./tableHeader";
-import TableBody from "./tableBody";
 import BookMark from "./bookmark";
 import QualitiesList from "./qualitiesList";
+import Table from "./table";
 
-const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ...rest }) => {
-
+const UsersTable = ({
+    users,
+    onSort,
+    selectedSort,
+    onToggleBookMark,
+    onDelete
+}) => {
     const columns = {
-        name: { path: "name", name: "Имя"},
+        name: { path: "name", name: "Имя" },
         qualities: {
             name: "Качества",
-            component: (user) => (<QualitiesList qualities={user.qualities}/>)
+            component: (user) => <QualitiesList qualities={user.qualities} />
         },
-        professions: { path: "profession.name", name: "Профессии"},
-        completedMeetings: { path: "completedMeetings", name: "Встретилсяб раз"},
-        rate: { path: "rate", name: "Оценка"},
+        professions: { path: "profession.name", name: "Профессии" },
+        completedMeetings: {
+            path: "completedMeetings",
+            name: "Встретилсяб раз"
+        },
+        rate: { path: "rate", name: "Оценка" },
         bookmark: {
             path: "bookmark",
             name: "Избранное",
@@ -36,13 +43,15 @@ const UsersTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, .
                 </button>
             )
         }
-    }
+    };
 
     return (
-        <table className="table">
-            <TableHeader {...{ onSort, selectedSort, columns }}/>
-            <TableBody {...{ columns, data: users }}/>
-        </table>
+        <Table
+            onSort={onSort}
+            selectedSort={selectedSort}
+            columns={columns}
+            data={users}
+        />
     );
 };
 
@@ -52,6 +61,6 @@ UsersTable.propTypes = {
     selectedSort: PropTypes.object.isRequired,
     onToggleBookMark: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
-}
+};
 
 export default UsersTable;
