@@ -6,7 +6,7 @@ const Loader = () => {
         <>
             <div className={classes.wrap}>
                 <div className={classes.loader}></div>
-                <span className={classes.text}>loading</span>
+                <span className={classes.text}>loading...</span>
             </div>
         </>
     );
