@@ -1,28 +1,30 @@
-import React, { useCallback, useLayoutEffect } from "react";
-import _ from "lodash";
+import React from "react";
+import { range } from "lodash";
 import PropTypes from "prop-types";
 
 const Pagination = ({ itemsCount, pageSize, onPageChange, currentPage }) => {
     const pageCount = Math.ceil(itemsCount / pageSize);
-    const pages = _.range(1, pageCount + 1);
+
+    if (pageCount === 1) return null;
+    const pages = range(1, pageCount + 1);
 
     return (
         <nav>
             <ul className="pagination">
                 {pages.map((page) => (
                     <li
-                        key={"page_" + page}
                         className={
                             "page-item" +
-                            (currentPage === page ? " active" : "")
+                            (page === currentPage ? " active" : "")
                         }
+                        key={"page_" + page}
                     >
-                        <a
+                        <button
                             className="page-link"
                             onClick={() => onPageChange(page)}
                         >
                             {page}
-                        </a>
+                        </button>
                     </li>
                 ))}
             </ul>
