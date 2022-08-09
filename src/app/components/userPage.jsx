@@ -5,7 +5,7 @@ import api from "../api";
 import Quality from "./quality";
 import Loader from "./UI/Loader/Loader";
 
-const UserPage = ({ id, users }) => {
+const UserPage = ({ id }) => {
     const [user, setUser] = useState(undefined);
 
     useEffect(() => {
@@ -22,16 +22,16 @@ const UserPage = ({ id, users }) => {
         <>
             {user
                 ? (
-                    <>
-                        <ul className="d-flex flex-column align-items-start mt-2 mx-3 w-25 list-unstyled">
-                            <li className="border border-primary py-2 px-3 w-100" >{user.name}</li>
-                            <li className="border border-primary py-2 px-3 w-100" >Профессия: {user.profession.name}</li>
-                            <li className="border border-primary py-2 px-3 w-100" >{user.qualities.map(qual => <Quality color={qual.color} name={qual.name} _id={qual._id} key={qual._id}/>)}</li>
-                            <li className="border border-primary py-2 px-3 w-100" >Встретился, раз: {user.completedMeetings}</li>
-                            <li className="border border-primary py-2 px-3 w-100" >Оценка: {user.rate}</li>
+                    <div className="d-flex flex-column w-25 p-3">
+                        <ul className="list-group">
+                            <li className="list-group-item" role="button">{user.name}</li>
+                            <li className="list-group-item" role="button">{user.profession.name}</li>
+                            <li className="list-group-item" role="button">{user.qualities.map(qual => <Quality color={qual.color} name={qual.name} _id={qual._id} key={qual._id}/>)}</li>
+                            <li className="list-group-item" role="button">Встретился, раз: {user.completedMeetings}</li>
+                            <li className="list-group-item" role="button">Оценка: {user.rate}</li>
                         </ul>
-                        <button className="mx-3" onClick={() => handleSave()}>Все пользователи</button>
-                    </>
+                        <button className="btn btn-primary mt-2" onClick={() => handleSave()}>Все пользователи</button>
+                    </div>
                 )
                 : <div className="d-flex justify-content-center align-items-center w-100 vh-100">
                     <Loader/>
@@ -42,8 +42,7 @@ const UserPage = ({ id, users }) => {
 };
 
 UserPage.propTypes = {
-    id: PropTypes.string,
-    users: PropTypes.array
+    id: PropTypes.string
 };
 
 export default UserPage;

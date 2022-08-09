@@ -16,7 +16,7 @@ const UsersList = () => {
     return (
         <>
             {userId
-                ? <UserPage users={users} id={userId} history={history} />
+                ? <UserPage id={userId} history={history} />
                 : <Users users={users} />
             }
         </>
