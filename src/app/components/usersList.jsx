@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import UserPage from "./userPage";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-const UsersList = ({ posts }) => {
+import { useParams } from "react-router-dom";
+import Users from "./users";
+import api from "../api";
+
+const UsersList = () => {
+    const params = useParams();
+    const [users, setUsers] = useState(null);
+
+    useEffect(() => {
+        api.users.fetchAll().then((data) => setUsers(data));
+    }, []);
+    const { userId } = params;
     return (
         <>
-            {posts.map(post => (
-                <Link key={post.id} to={`users/${post.id}`} >
-                    <h3>{post.label}</h3>
-                </Link>
-            ))}
+            {userId
+                ? <UserPage users={users} id={userId} history={history} />
+                : <Users users={users} />
+            }
         </>
     );
 };
 
 UsersList.propTypes = {
-    posts: PropTypes.array
+    match: PropTypes.object,
+    location: PropTypes.object
 };
 
 export default UsersList;

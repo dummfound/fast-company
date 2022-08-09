@@ -3,8 +3,8 @@ import Navbar from "./components/navbar";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "./components/login";
 import Home from "./components/home";
-import Posts from "./components/posts";
 import NotFoundPage from "./components/notFoundPage";
+import UsersList from "./components/usersList";
 
 function App() {
     return (
@@ -13,7 +13,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={ Home } />
                 <Route path="/login" component={ Login } />
-                <Route path="/users/:userId?" component={ Posts } />
+                <Route path="/users/:userId?" component={ UsersList } />
                 <Route path="/404" component={ NotFoundPage } />
                 <Redirect to="/404" />
             </Switch>

@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
     return (
-        <ul className="d-flex gap-3 list-unstyled mx-3">
-            <li>
-                <Link to="/" className="text-decoration-none">Main</Link>
+        <ul className="nav">
+            <li className="nav-item">
+                <Link to="/" className="nav-link active" aria-current="page">Main</Link>
             </li>
-            <li>
-                <Link to="/login" className="text-decoration-none">Login</Link>
+            <li className="nav-item">
+                <Link to="/login" className="nav-link">Login</Link>
             </li>
-            <li>
-                <Link to="/users" className="text-decoration-none">Users</Link>
+            <li className="nav-item">
+                <Link to="/users" className="nav-link">Users</Link>
             </li>
         </ul>
     );
