@@ -8,11 +8,11 @@ import api from "../api";
 const UsersList = () => {
     const params = useParams();
     const [users, setUsers] = useState(null);
+    const { userId } = params;
 
     useEffect(() => {
         api.users.fetchAll().then((data) => setUsers(data));
     }, []);
-    const { userId } = params;
     return (
         <>
             {userId
