@@ -51,9 +51,9 @@ const User = ({ id }) => {
     }
 
     return (
-        <>
+        <div className="vh-100 d-flex align-items-center justify-content-center">
             <LoaderR />
-        </>
+        </div>
     );
 };
 User.propTypes = {
