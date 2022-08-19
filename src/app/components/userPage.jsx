@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import api from "../api";
 import Quality from "./quality";
 import Loader from "./UI/Loader/Loader";
 
-const UserPage = ({ id }) => {
+const UserPage = () => {
     const [user, setUser] = useState(undefined);
+    const params = useParams();
+    const { userId } = params;
 
     useEffect(() => {
-        api.users.getById(id).then((data) => setUser(data));
+        api.users.getById(userId).then((data) => setUser(data));
     }, []);
 
     const history = useHistory();
