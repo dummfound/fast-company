@@ -21,12 +21,15 @@ const Login = () => {
     const validatorConfig = {
         email: {
             isRequired: {
-                message: "Email is required"
+                message: "Email is required!"
+            },
+            isEmail: {
+                message: "Email is not valid!"
             }
         },
         password: {
             isRequired: {
-                message: "Password is required"
+                message: "Password is required!"
             }
         }
     };
