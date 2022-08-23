@@ -18,6 +18,8 @@ const Login = () => {
         return Object.keys(errors).length === 0;
     };
 
+    const isValid = Object.keys(errors).length === 0;
+
     const validatorConfig = {
         email: {
             isRequired: {
@@ -72,7 +74,7 @@ const Login = () => {
                 label="password"
                 error={errors.password}
             />
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={!isValid}>Submit</button>
         </form>
     );
 };
