@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "./textField";
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
+    const [, setErrors] = useState();
     const handleChange = ({ target }) => {
         setData((prevState) => ({
             ...prevState,
@@ -10,8 +11,25 @@ const Login = () => {
         }));
     };
 
+    const validate = () => {
+        const errors = {};
+        for (const fieldName in data) {
+            if (data[fieldName] === "") {
+                errors[fieldName] = `${fieldName} is required`;
+            }
+        }
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
+
+    useEffect(() => {
+        validate();
+    }, [data]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        const isValidate = validate();
+        if (!isValidate) return;
         console.log(data);
     };
 
