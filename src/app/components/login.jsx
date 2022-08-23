@@ -3,7 +3,7 @@ import TextField from "./textField";
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
-    const [, setErrors] = useState();
+    const [errors, setErrors] = useState({});
     const handleChange = ({ target }) => {
         setData((prevState) => ({
             ...prevState,
@@ -40,6 +40,7 @@ const Login = () => {
                 onChange={handleChange}
                 value={data.email}
                 label="Email"
+                error={errors.email}
             />
             <TextField
                 name="password"
@@ -47,6 +48,7 @@ const Login = () => {
                 value={data.password}
                 type="password"
                 label="password"
+                error={errors.password}
             />
             <button type="submit">Submit</button>
         </form>
