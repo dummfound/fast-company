@@ -30,6 +30,7 @@ export function validator(data, config) {
         }
         if (statusValidate) return config.message;
     }
+
     for (const fieldName in data) {
         for (const validateMethod in config[fieldName]) {
             const error = validate(

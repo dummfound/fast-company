@@ -1,8 +1,8 @@
 import React from "react";
 import Navbar from "./components/navbar";
 import { Route, Switch } from "react-router-dom";
-import Login from "./components/login";
-import Home from "./components/home";
+import Login from "./layouts/login";
+import Home from "./layouts/home";
 import NotFoundPage from "./components/notFoundPage";
 import UserPage from "./components/userPage";
 import Users from "./components/users";
