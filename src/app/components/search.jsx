@@ -22,7 +22,9 @@ const Search = ({ name, handleChange, data, clearFilter }) => {
 };
 Search.propTypes = {
     name: PropTypes.string,
-    users: PropTypes.array.isRequired
+    handleChange: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired,
+    clearFilter: PropTypes.func.isRequired
 };
 
 export default Search;
