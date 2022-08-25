@@ -6,8 +6,8 @@ import GroupList from "./groupList";
 import SearchStatus from "./searchStatus";
 import UsersTable from "./usersTable";
 import { orderBy } from "lodash";
-// import Loader from "./UI/Loader/Loader";
 import LoaderR from "./UI/Loader/LoaderR";
+import Search from "./search";
 
 const Users = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -34,6 +34,29 @@ const Users = () => {
             })
         );
     };
+    const clearFilter = () => {
+        setSelectedProf(null);
+    };
+
+    // Поиск
+
+    const [data, setData] = useState({ finder: "" });
+
+    const handleChange = ({ target }) => {
+        clearFilter();
+        setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+    };
+
+    const clearSearchValue = () => {
+        setData({ finder: "" });
+    };
+
+    const handleFilteredFinder =
+        users &&
+        users.filter((user) => {
+            return user.name.toLowerCase().includes(data.finder.toLowerCase());
+        });
+    // __________________________________________________________________________
 
     const pageSize = 8;
 
@@ -42,6 +65,7 @@ const Users = () => {
     }, []);
 
     const handleProfessionSelect = (item) => {
+        clearSearchValue();
         setSelectedProf(item);
         setCurrentPage(1);
     };
@@ -62,18 +86,25 @@ const Users = () => {
           )
         : users;
 
+    const getSearchedAndFiltered = () => {
+        if (selectedProf) {
+            return filteredUsers;
+        } else if (data) {
+            return handleFilteredFinder;
+        } else {
+            return users;
+        }
+    };
+
     if (users) {
-        const count = filteredUsers.length;
+        const searchedAndFilteredUsers = getSearchedAndFiltered();
+        const count = searchedAndFilteredUsers.length;
         const sortedUsers = orderBy(
-            filteredUsers,
+            searchedAndFilteredUsers,
             [sortBy.path],
             [sortBy.order]
         );
         const usersCrop = paginate(sortedUsers, currentPage, pageSize);
-
-        const clearFilter = () => {
-            setSelectedProf(null);
-        };
 
         return (
             <div className="d-flex">
@@ -95,6 +126,16 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
+                    <div>
+                        <Search
+                            labelValue="Поиск"
+                            name="finder"
+                            handleChange={handleChange}
+                            data={data}
+                            clearFilter={clearFilter}
+                        />
+                    </div>
+
                     {count > 0 && (
                         <UsersTable
                             users={usersCrop}

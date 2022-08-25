@@ -2,8 +2,8 @@ import React from "react";
 import NavBar from "./components/navBar";
 
 import { Route, Switch } from "react-router-dom";
-import Home from "./components/home";
-import Login from "./components/Login";
+import Home from "./layouts/home";
+import Login from "./layouts/Login";
 import NotFound from "./components/not-found";
 
 import UserListSecond from "./components/userListSecond";
