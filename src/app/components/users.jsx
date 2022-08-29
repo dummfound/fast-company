@@ -64,7 +64,7 @@ const Users = () => {
     const filteredUsers = users &&
         users.filter((user) => {
             if (selectedProf) {
-                return JSON.stringify(user.profession) === JSON.stringify(selectedProf);
+                return user.profession._id === selectedProf._id;
             } else if (searchQuery) {
                 return user.name.toLowerCase().includes(searchQuery.toLowerCase());
             } else {
