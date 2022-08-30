@@ -21,6 +21,10 @@ const UsersListPage = () => {
         api.users.fetchAll().then((data) => setUsers(data));
     }, []);
 
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfession(data));
+    }, []);
+
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
     };
@@ -37,10 +41,6 @@ const UsersListPage = () => {
     };
 
     const pageSize = 8;
-
-    useEffect(() => {
-        api.professions.fetchAll().then((data) => setProfession(data));
-    }, []);
 
     const handleProfessionSelect = (item) => {
         searchQuery && setSearchQuery("");
