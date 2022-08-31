@@ -14,8 +14,8 @@ function App() {
             <Switch>
                 <Route path="/" exact component={ Home } />
                 <Route path="/login/:type?" component={ Login } />
-                <Route path="/usersApi/:userId" component={ UserPage } />
-                <Route path="/usersApi" component={ UsersListPage } />
+                <Route path="/users/:userId" component={ UserPage } />
+                <Route path="/users" component={ UsersListPage } />
                 <Route path="*" component={ NotFoundPage } />
             </Switch>
         </>
