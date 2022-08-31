@@ -32,7 +32,7 @@ const qualities = {
     }
 };
 
-const users = [
+const usersApi = [
     {
         _id: "67rdca3eeb7f6fgeed471815",
         name: "Джон Дориан",
@@ -146,14 +146,14 @@ const users = [
 const fetchAll = () =>
     new Promise((resolve) => {
         window.setTimeout(function() {
-            resolve(users);
+            resolve(usersApi);
         }, 2000);
     });
 
 const getById = (id) =>
     new Promise((resolve) => {
         window.setTimeout(function() {
-            resolve(users.find((user) => user._id === id));
+            resolve(usersApi.find((user) => user._id === id));
         }, 1000);
     });
 
