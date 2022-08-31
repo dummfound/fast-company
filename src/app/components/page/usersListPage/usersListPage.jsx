@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { paginate } from "../utils/paginate";
-import Pagination from "./pagination";
-import api from "../api";
-import GroupList from "./groupList";
-import SearchStatus from "./searchStatus";
-import UsersTable from "./usersTable";
+import { paginate } from "../../../utils/paginate";
+import Pagination from "../../common/pagination";
+import api from "../../../api";
+import GroupList from "../../common/groupList";
+import SearchStatus from "../../UI/searchStatus";
+import UsersTable from "../../UI/usersTable";
 import { orderBy } from "lodash";
-import Loader from "./UI/Loader/Loader";
-import SearchInput from "./searchInput";
+import Loader from "../../UI/Loader/Loader";
+import SearchInput from "../../common/form/searchInput";
 
-const Users = () => {
+const UsersListPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfession] = useState(null);
     const [selectedProf, setSelectedProf] = useState(null);
@@ -19,6 +19,10 @@ const Users = () => {
 
     useEffect(() => {
         api.users.fetchAll().then((data) => setUsers(data));
+    }, []);
+
+    useEffect(() => {
+        api.professions.fetchAll().then((data) => setProfession(data));
     }, []);
 
     const handleDelete = (userId) => {
@@ -37,10 +41,6 @@ const Users = () => {
     };
 
     const pageSize = 8;
-
-    useEffect(() => {
-        api.professions.fetchAll().then((data) => setProfession(data));
-    }, []);
 
     const handleProfessionSelect = (item) => {
         searchQuery && setSearchQuery("");
@@ -134,4 +134,4 @@ const Users = () => {
         </div>);
 };
 
-export default Users;
+export default UsersListPage;
