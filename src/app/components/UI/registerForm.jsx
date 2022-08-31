@@ -5,6 +5,7 @@ import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
+import CheckBoxField from "../common/form/checkBoxField";
 const RegisterForm = () => {
     const [professions, setProfession] = useState(null);
     const [data, setData] = useState({
@@ -12,7 +13,8 @@ const RegisterForm = () => {
         password: "",
         profession: "",
         sex: "mail",
-        qualities: []
+        qualities: [],
+        license: false
     });
     const [errors, setErrors] = useState({});
     const [qualities, setQualities] = useState({});
@@ -64,6 +66,11 @@ const RegisterForm = () => {
         profession: {
             isRequired: {
                 message: "Profession is required"
+            }
+        },
+        license: {
+            isRequired: {
+                message: "Вы не можете использовать наш сервис без подтверждения лицензионного соглашения"
             }
         }
     };
@@ -122,6 +129,14 @@ const RegisterForm = () => {
                 name="qualities"
                 label="Выбирите ваши качества"
             />
+            <CheckBoxField
+                value={data.license}
+                onChange={handleChange}
+                name="license"
+                error={errors.license}
+            >
+                Подтвердить <a>лицензионное соглашение</a>
+            </CheckBoxField>
             <button
                 className="btn btn-primary w-100 mx-auto"
                 type="submit"
