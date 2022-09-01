@@ -1,2 +1,9 @@
 import UserPage from "./userPage";
-export default UserPage;
+import UserPageEdit from "./userPageEdit";
+const userPageOne = {
+    UserPage,
+    UserPageEdit
+
+};
+
+export default userPageOne;

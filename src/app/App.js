@@ -4,8 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./layouts/login";
 import Home from "./layouts/home";
 import NotFoundPage from "./components/UI/notFoundPage";
-import UserPage from "./components/page/userPage";
+import UserPage from "./components/page/userPage/userPage";
 import UsersListPage from "./components/page/usersListPage";
+import UserPageEdit from "./components/page/userPage/userPageEdit";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={ Home } />
                 <Route path="/login/:type?" component={ Login } />
+                <Route path="/users/:userId/edit" component={ UserPageEdit } />
                 <Route path="/users/:userId" component={ UserPage } />
                 <Route path="/users" component={ UsersListPage } />
                 <Route path="*" component={ NotFoundPage } />
