@@ -107,7 +107,7 @@ const UserPageEdit = () => {
             profession: getProfessionById(profession),
             qualities: getQualities(qualities)
         });
-        history.replace(`/users/${profession}`);
+        history.replace(`/users`);
     };
     return (
         <div className="ms-3 me-3">
