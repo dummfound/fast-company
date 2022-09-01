@@ -5,9 +5,11 @@ import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 const UserEditForm = () => {
     const history = useHistory();
+    const params = useParams();
+    const { userId } = params;
     const [professions, setProfession] = useState(null);
     const [data, setData] = useState({
         name: "",
@@ -120,12 +122,12 @@ const UserEditForm = () => {
         const isValidate = validate();
         if (!isValidate) return;
         const { profession, qualities } = data;
-        api.users.update(profession, {
+        api.users.update(userId, {
             ...data,
             profession: getProfessionById(profession),
             qualities: getQualities(qualities)
         });
-        history.replace(`/users/${profession}`);
+        history.replace(`/users/${userId}`);
     };
 
     return (
