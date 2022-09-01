@@ -1,63 +1,54 @@
-import React, { useState, useEffect } from "react";
-import API from "../../../api";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import api from "../../../api";
+import Qualities from "../../UI/qualities";
+import { useHistory, useParams } from "react-router-dom";
 import LoaderR from "../../UI/Loader/LoaderR";
 
-const UserPage = ({ id }) => {
-    const [user, setUser] = useState(null);
+const UserPage = () => {
     const history = useHistory();
-    const { replace } = history;
+    const [user, setUser] = useState();
+
+    const params = useParams();
+    const { userId } = params;
+
+    console.log(userId);
+
     useEffect(() => {
-        API.users.getById(id).then((data) => {
-            setUser(data);
-        });
+        api.users.getById(userId).then((data) => setUser(data));
     }, []);
-
-    const handleAllUsers = () => {
-        replace("/users");
+    const handleClick = () => {
+        history.push(`/users/${userId}/edit`);
     };
-
     if (user) {
         return (
-            <div className="d-flex flex-column flex-shrink-0 p-2">
-                <h1>{user.name}</h1>
-                <h3>{`Профессия: ${user.profession.name}`}</h3>
-                <h6>
-                    {user.qualities.map((item) => (
-                        <span
-                            key={item._id}
-                            className={
-                                "badge rounded-pill text-bg-" + item.color
-                            }
-                        >
-                            {item.name}
-                        </span>
-                    ))}
-                </h6>
-                <h6>{`completedMeetings: ${user.completedMeetings}`}</h6>
-                <h2>{`rate: ${user.rate}`}</h2>
-                <h2>
-                    <button
-                        onClick={handleAllUsers}
-                        type="button"
-                        className="btn btn-outline-dark"
-                    >
-                        Все пользователи
-                    </button>
-                </h2>
+            <div className="ms-3 me-3">
+                <h1> {user.name}</h1>
+                <h2>Профессия: {user.profession.name}</h2>
+                <Qualities qualities={user.qualities} />
+                <p>completedMeetings: {user.completedMeetings}</p>
+                <p>Email: {user.email}</p>
+                <p>Sex: {user.sex}</p>
+                <h2>Rate: {user.rate}</h2>
+                <button
+                    className="btn btn-outline-success"
+                    onClick={handleClick}
+                >
+                    Изменить
+                </button>
+            </div>
+        );
+    } else {
+        return (
+            <div className="vh-100 d-flex align-items-center justify-content-center">
+                <LoaderR />
             </div>
         );
     }
-
-    return (
-        <div className="vh-100 d-flex align-items-center justify-content-center">
-            <LoaderR />
-        </div>
-    );
 };
+
 UserPage.propTypes = {
-    id: PropTypes.string.isRequired
+    userId: PropTypes.string.isRequired
 };
 
 export default UserPage;
