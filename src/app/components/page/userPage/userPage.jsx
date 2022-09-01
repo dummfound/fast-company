@@ -17,7 +17,7 @@ const UserPage = () => {
     const history = useHistory();
 
     const handleSave = () => {
-        history.replace("/users");
+        history.replace(`/users/${userId}/edit`);
     };
 
     return (
@@ -28,11 +28,12 @@ const UserPage = () => {
                         <ul className="list-group">
                             <li className="list-group-item" role="button">{user.name}</li>
                             <li className="list-group-item" role="button">{user.profession.name}</li>
+                            <li className="list-group-item" role="button">{user.email}</li>
                             <li className="list-group-item" role="button">{user.qualities.map(qual => <Quality color={qual.color} name={qual.name} _id={qual._id} key={qual._id}/>)}</li>
                             <li className="list-group-item" role="button">Встретился, раз: {user.completedMeetings}</li>
                             <li className="list-group-item" role="button">Оценка: {user.rate}</li>
                         </ul>
-                        <button className="btn btn-primary mt-2" onClick={() => handleSave()}>Все пользователи</button>
+                        <button className="btn btn-primary mt-2" onClick={() => handleSave()}>Edit</button>
                     </div>
                 )
                 : <div className="d-flex justify-content-center align-items-center w-100 vh-100">
