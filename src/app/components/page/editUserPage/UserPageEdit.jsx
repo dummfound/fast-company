@@ -5,7 +5,7 @@ import SelectField from "../../common/form/selectField";
 import RadioField from "../../common/form/radioField";
 import MultySelectField from "../../common/form/multySelectField";
 import * as yup from "yup";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const UserPageEdit = () => {
     const [data, setData] = useState({
@@ -16,6 +16,8 @@ const UserPageEdit = () => {
         qualities: []
     });
     const history = useHistory();
+    const params = useParams();
+    const { userId } = params;
 
     const [qualities, setQualities] = useState([]);
     const [professions, setProfession] = useState([]);
@@ -100,7 +102,7 @@ const UserPageEdit = () => {
         const isValid = validate();
         if (!isValid) return;
         const { profession, qualities } = data;
-        api.users.update(profession, {
+        api.users.update(userId, {
             ...data,
             profession: getProfessionById(profession),
             qualities: getQualities(qualities)
