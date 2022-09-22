@@ -28,9 +28,16 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         scope="col"
                     >
                         {columns[column].name}
-                        {selectedSort.path === columns[column].path &&
-                            <i className={"bi bi-caret" + (selectedSort.order === "asc" ? "-up-fill" : "-down-fill")}></i>
-                        }
+                        {selectedSort.path === columns[column].path && (
+                            <i
+                                className={
+                                    "bi bi-caret" +
+                                    (selectedSort.order === "asc"
+                                        ? "-up-fill"
+                                        : "-down-fill")
+                                }
+                            ></i>
+                        )}
                     </th>
                 ))}
             </tr>

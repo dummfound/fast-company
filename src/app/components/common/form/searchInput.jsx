@@ -6,10 +6,10 @@ const SearchInput = ({ searchQuery, handleChangeValue }) => {
         <div className="input-group mb-3 w-100 position-relative">
             <input
                 className="w-100"
-                type= "text"
+                type="text"
                 placeholder="Search..."
                 value={searchQuery}
-                onChange={e => handleChangeValue(e)}
+                onChange={(e) => handleChangeValue(e)}
             />
         </div>
     );

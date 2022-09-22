@@ -32,7 +32,7 @@ const qualitiesApi = {
 };
 const fetchAll = () =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(qualitiesApi);
         }, 2000);
     });

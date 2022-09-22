@@ -13,15 +13,15 @@ function App() {
         <>
             <Navbar />
             <Switch>
-                <Route path="/" exact component={ Home } />
-                <Route path="/login/:type?" component={ Login } />
-                <Route path="/users/:userId/edit" component={ UserPageEdit } />
-                <Route path="/users/:userId" component={ UserPage } />
-                <Route path="/users" component={ UsersListPage } />
-                <Route path="*" component={ NotFoundPage } />
+                <Route path="/" exact component={Home} />
+                <Route path="/login/:type?" component={Login} />
+                <Route path="/users/:userId/edit" component={UserPageEdit} />
+                <Route path="/users/:userId" component={UserPage} />
+                <Route path="/users" component={UsersListPage} />
+                <Route path="*" component={NotFoundPage} />
             </Switch>
         </>
     );
-};
+}
 
 export default App;

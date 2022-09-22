@@ -38,7 +38,8 @@ const LoginForm = () => {
                 message: "Password is required!"
             },
             isCapitalSymbol: {
-                message: "Password must contain a minimum of 1 upper case letter!"
+                message:
+                    "Password must contain a minimum of 1 upper case letter!"
             },
             isContainDigit: {
                 message: "Password must contain a minimum of 1 digit!"
@@ -85,7 +86,13 @@ const LoginForm = () => {
             >
                 Оставаться в системе
             </CheckBoxField>
-            <button className="btn btn-primary w-100 mx-auto" type="submit" disabled={!isValid}>Submit</button>
+            <button
+                className="btn btn-primary w-100 mx-auto"
+                type="submit"
+                disabled={!isValid}
+            >
+                Submit
+            </button>
         </form>
     );
 };

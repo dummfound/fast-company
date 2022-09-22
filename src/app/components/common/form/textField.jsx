@@ -33,7 +33,11 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                         className="btn btn-outline-secondary"
                         onClick={toggleShowPassword}
                     >
-                        <i className={"bi bi-eye" + (showPassword ? "-slash" : "")}></i>
+                        <i
+                            className={
+                                "bi bi-eye" + (showPassword ? "-slash" : "")
+                            }
+                        ></i>
                     </button>
                 )}
                 {error && <div className="invalid-feedback">{error}</div>}

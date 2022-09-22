@@ -1,7 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SelectField = ({ label, value, onChange, defaultOption, options, error, name }) => {
+const SelectField = ({
+    label,
+    value,
+    onChange,
+    defaultOption,
+    options,
+    error,
+    name
+}) => {
+    console.log("options", options);
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
@@ -10,10 +19,10 @@ const SelectField = ({ label, value, onChange, defaultOption, options, error, na
         return "form-select" + (error ? " is-invalid" : "");
     };
 
-    const optionsArray = options &&
-    !Array.isArray(options) && typeof options === "object"
-        ? Object.values(options)
-        : options;
+    const optionsArray =
+        options && !Array.isArray(options) && typeof options === "object"
+            ? Object.values(options)
+            : options;
 
     // const optionsArray = options && !Array.isArray(options) && typeof (options) === "object"
     //     ? Object.keys(options).map(optionsName =>
@@ -24,10 +33,7 @@ const SelectField = ({ label, value, onChange, defaultOption, options, error, na
     //     : options;
     return (
         <div className="mb-4">
-            <label
-                htmlFor={name}
-                className="form-label"
-            >
+            <label htmlFor={name} className="form-label">
                 {label}
             </label>
             <select

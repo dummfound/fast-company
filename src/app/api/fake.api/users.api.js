@@ -172,7 +172,7 @@ if (!localStorage.getItem("users")) {
 
 const fetchAll = () =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(JSON.parse(localStorage.getItem("users")));
         }, 2000);
     });
@@ -187,7 +187,7 @@ const update = (id, data) =>
 
 const getById = (id) =>
     new Promise((resolve) => {
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             resolve(
                 JSON.parse(localStorage.getItem("users")).find(
                     (user) => user._id === id

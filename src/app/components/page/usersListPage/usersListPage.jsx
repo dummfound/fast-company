@@ -6,8 +6,8 @@ import GroupList from "../../common/groupList";
 import SearchStatus from "../../UI/searchStatus";
 import UsersTable from "../../UI/usersTable";
 import { orderBy } from "lodash";
-import Loader from "../../UI/Loader/Loader";
 import SearchInput from "../../common/form/searchInput";
+import Loader from "../../UI/Loader/Loader";
 
 const UsersListPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -61,12 +61,15 @@ const UsersListPage = () => {
         setSearchQuery(e.target.value);
     };
 
-    const filteredUsers = users &&
+    const filteredUsers =
+        users &&
         users.filter((user) => {
             if (selectedProf) {
                 return user.profession._id === selectedProf._id;
             } else if (searchQuery) {
-                return user.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return user.name
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase());
             } else {
                 return users;
             }
@@ -130,8 +133,9 @@ const UsersListPage = () => {
     }
     return (
         <div className="vh-100 d-flex align-items-center justify-content-center">
-            <Loader/>
-        </div>);
+            <Loader />
+        </div>
+    );
 };
 
 export default UsersListPage;
