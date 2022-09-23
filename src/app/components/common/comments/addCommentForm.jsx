@@ -27,7 +27,6 @@ const AddCommentForm = ({ onSubmit }) => {
     }, [data]);
 
     const handleChange = (target) => {
-        console.log("target", target);
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
@@ -59,7 +58,6 @@ const AddCommentForm = ({ onSubmit }) => {
         const isValidate = validate();
         if (!isValidate) return;
         onSubmit(data);
-        console.log("data", data);
     };
 
     return (

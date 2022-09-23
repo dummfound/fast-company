@@ -3,7 +3,7 @@ import Comment from "./comment";
 import PropTypes from "prop-types";
 
 const CommentsList = ({ comments, userId, onRemove }) => {
-    console.log("comments", comments);
+    console.log(comments);
     return (
         comments &&
         comments.map((comment) => (
@@ -11,8 +11,7 @@ const CommentsList = ({ comments, userId, onRemove }) => {
                 key={comment._id}
                 onRemove={onRemove}
                 comment={comment}
-                userId={userId}
-                comentId={comment._id}
+                userId={comment.userId}
             />
         ))
     );

@@ -3,13 +3,12 @@ import PropTypes from "prop-types";
 import api from "../../../api";
 import { displayDate } from "../../../utils/displayDate";
 
-const Comment = ({ comment, userId, onRemove, comentId }) => {
+const Comment = ({ comment, userId, onRemove }) => {
     const [user, setUser] = useState([]);
-    console.log("user", user);
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
     }, []);
-
+;
     return (
         <div className="bg-light card-body  mb-3">
             <div className="row">
