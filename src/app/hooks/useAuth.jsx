@@ -3,8 +3,15 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import userService from "../services/user.service";
 import { toast } from "react-toastify";
+import localStorageService from "../services/localStorageServices";
+import { useHistory } from "react-router-dom";
 
-const httpAuth = axios.create();
+export const httpAuth = axios.create({
+    baseURL: "https://identitytoolkit.googleapis.com/v1/",
+    params: {
+        key: process.env.REACT_APP_FIREBASE_KEY
+    }
+});
 
 const AuthContex = React.createContext();
 
@@ -12,13 +19,15 @@ export const useAuth = () => {
     return useContext(AuthContex);
 };
 
-const TOKEN_KEY = "jwt-token";
-const REFRESH_KEY = "jwt-refresh-token";
-const EXPIRES_KEY = "jwt-expires";
+const randomizer = (max, min) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
 const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState();
     const [error, setError] = useState(null);
+    const [isLoading, setLoading] = useState(true);
+    const history = useHistory();
     useEffect(() => {
         if (error !== null) {
             toast(error);
@@ -29,30 +38,33 @@ const AuthProvider = ({ children }) => {
         const { message } = error.response.data;
         setError(message);
     }
-    function setTokens({ refreshToken, idToken, expiresIn = 3600 }) {
-        const exppiresDate = new Date().getTime() + expiresIn * 1000;
-        localStorage.setItem(TOKEN_KEY, idToken);
-        localStorage.setItem(REFRESH_KEY, refreshToken);
-        localStorage.setItem(EXPIRES_KEY, exppiresDate);
+    function logout() {
+        localStorageService.removeAuthData();
+        setCurrentUser(null);
+        history.push("/");
     }
+
     async function createUser(data) {
         try {
-            const { content } = userService.create(data);
+            const { content } = await userService.create(data);
             setCurrentUser(content);
         } catch (error) {
             errorCatcher(error);
         }
     }
     async function loginUp({ email, password, ...rest }) {
-        const key = "AIzaSyAG_UruQ2jqEhIDo2v0N5dwlJe5_pcwqaI";
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
         try {
-            const { data } = await httpAuth.post(url, {
-                email,
-                password,
-                returnSecureToken: true
-            });
-            setTokens(data);
+            const { data } = await httpAuth.patch(
+                `accounts:signInWithPassword`,
+                {
+                    email,
+                    password,
+                    returnSecureToken: true
+                }
+            );
+            console.log(data);
+            localStorageService.setTokens(data);
+            await getUserData();
         } catch (error) {
             errorCatcher(error);
             const { code, message } = error.response.data.error;
@@ -69,17 +81,50 @@ const AuthProvider = ({ children }) => {
             }
         }
     }
-    async function signUp({ email, password, ...rest }) {
-        const key = "AIzaSyAG_UruQ2jqEhIDo2v0N5dwlJe5_pcwqaI";
-        const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
+
+    async function update({ name, email, profession, sex, qualities }) {
+        const tokenId = localStorageService.getAccessToken();
         try {
-            const { data } = await httpAuth.post(url, {
+            const { data } = await httpAuth.post("accounts:update", {
+                email: email,
+                idToken: tokenId,
+                returnSecureToken: true,
+                displayName: name
+            });
+            localStorageService.setTokens(data);
+            createUser({
+                ...currentUser,
+                name,
+                email,
+                profession,
+                sex,
+                qualities
+            });
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
+
+    async function signUp({ email, password, ...rest }) {
+        try {
+            const { data } = await httpAuth.post(`accounts:signUp`, {
                 email,
                 password,
                 returnSecureToken: true
             });
-            setTokens(data);
-            createUser({ _id: data.localId, email, ...rest });
+            localStorageService.setTokens(data);
+            createUser({
+                _id: data.localId,
+                email,
+                rate: randomizer(1, 10),
+                completeMeetings: randomizer(1, 100),
+                image: `https://avatars.dicebear.com/api/avataaars/${(
+                    Math.random() + 1
+                )
+                    .toString(36)
+                    .substring(7)}.svg`,
+                ...rest
+            });
             console.log(data);
         } catch (error) {
             errorCatcher(error);
@@ -95,9 +140,30 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    async function getUserData() {
+        try {
+            const { content } = await userService.getCurrentUsers();
+            setCurrentUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (localStorageService.getAccessToken()) {
+            getUserData();
+        } else {
+            setLoading(false);
+        }
+    }, []);
+
     return (
-        <AuthContex.Provider value={{ signUp, currentUser, loginUp }}>
-            {children}
+        <AuthContex.Provider
+            value={{ signUp, currentUser, loginUp, logout, update }}
+        >
+            {!isLoading ? children : "Loading"}
         </AuthContex.Provider>
     );
 };

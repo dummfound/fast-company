@@ -15,6 +15,7 @@ const LoginForm = () => {
     const [errors, setErrors] = useState({});
     const { loginUp } = useAuth();
     const history = useHistory();
+
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -63,8 +64,12 @@ const LoginForm = () => {
 
         try {
             loginUp(data);
-            history.push("/");
-            console.log(data);
+            history.push(
+                "/"
+                // history.location.pathname.state.from.pathname
+                //     ? history.location.pathname.state.from.pathname
+                //     : "/"
+            );
         } catch (error) {
             setErrors(error);
         }

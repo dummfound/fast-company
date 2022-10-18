@@ -13,6 +13,7 @@ const Login = () => {
             prevState === "register" ? "login" : "register"
         );
     };
+    console.log(process.env);
 
     return (
         <div className="container mt-5">
